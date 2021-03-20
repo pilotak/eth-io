@@ -1,0 +1,500 @@
+esphome:
+  name: eth_io
+  platform: ESP32
+  board: nodemcu-32s
+
+ethernet:
+  type: LAN8720
+  mdc_pin: GPIO23
+  mdio_pin: GPIO18
+  phy_addr: 1
+  clk_mode: GPIO0_IN
+  power_pin: GPIO17
+
+logger:
+
+ota:
+
+api:
+
+i2c:
+  sda: GPIO33
+  scl: GPIO32
+  frequency: 100kHz
+
+mcp23017:
+  - id: out_hub1
+    address: 0x20
+
+  - id: in_hub1
+    address: 0x21
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+    timezone: "Europe/Prague"
+
+status_led:
+  pin:
+    number: GPIO5
+
+sensor:
+  - platform: pulse_counter
+    pin: GPIO14
+    name: "Power consumption 1"
+    id: power1
+    unit_of_measurement: 'Wh'
+    internal_filter: 13us
+    filters:
+      - multiply: 16.66666666666
+    count_mode:
+      rising_edge: DISABLE
+      falling_edge: INCREMENT
+
+  - platform: pulse_counter
+    pin: GPIO16
+    name: "Power consumption 2"
+    id: power2
+    unit_of_measurement: 'Wh'
+    internal_filter: 13us
+    filters:
+      - multiply: 16.66666666666
+    count_mode:
+      rising_edge: DISABLE
+      falling_edge: INCREMENT
+
+  - platform: pulse_counter
+    pin: GPIO15
+    name: "Power consumption 3"
+    id: power3
+    unit_of_measurement: 'Wh'
+    internal_filter: 13us
+    filters:
+      - multiply: 16.66666666666
+    count_mode:
+      rising_edge: DISABLE
+      falling_edge: INCREMENT
+
+  - platform: pulse_counter
+    pin: GPIO13
+    name: "Power consumption 4"
+    id: power4
+    unit_of_measurement: 'Wh'
+    internal_filter: 13us
+    filters:
+      - multiply: 16.66666666666
+    count_mode:
+      rising_edge: DISABLE
+      falling_edge: INCREMENT
+
+  - platform: total_daily_energy
+    name: "Daily power consumption 1"
+    icon: "mdi:current-ac"
+    power_id: power1
+    unit_of_measurement: 'kWh'
+    filters:
+      - multiply: 0.001
+
+  - platform: total_daily_energy
+    name: "Daily power consumption 2"
+    icon: "mdi:current-ac"
+    power_id: power2
+    unit_of_measurement: 'kWh'
+    filters:
+      - multiply: 0.001
+
+  - platform: total_daily_energy
+    name: "Daily power consumption 3"
+    icon: "mdi:current-ac"
+    power_id: power3
+    unit_of_measurement: 'kWh'
+    filters:
+      - multiply: 0.001
+
+  - platform: total_daily_energy
+    name: "Daily power consumption 4"
+    icon: "mdi:current-ac"
+    power_id: power4
+    unit_of_measurement: 'kWh'
+    filters:
+      - multiply: 0.001
+
+binary_sensor:
+  - platform: gpio
+    id: in1
+    pin:
+      mcp23017: in_hub1
+      number: 7
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output1
+
+  - platform: gpio
+    id: in2
+    pin:
+      mcp23017: in_hub1
+      number: 6
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output2
+
+  - platform: gpio
+    id: in3
+    pin:
+      mcp23017: in_hub1
+      number: 5
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output3
+
+  - platform: gpio
+    id: in4
+    pin:
+      mcp23017: in_hub1
+      number: 4
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output4
+
+  - platform: gpio
+    id: in5
+    pin:
+      mcp23017: in_hub1
+      number: 8
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output5
+
+  - platform: gpio
+    id: in6
+    pin:
+      mcp23017: in_hub1
+      number: 9
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output6
+
+  - platform: gpio
+    id: in7
+    pin:
+      mcp23017: in_hub1
+      number: 10
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output7
+
+  - platform: gpio
+    id: in8
+    pin:
+      mcp23017: in_hub1
+      number: 11
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output8
+
+  - platform: gpio
+    id: in9
+    pin:
+      mcp23017: in_hub1
+      number: 15
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output9
+
+  - platform: gpio
+    id: in10
+    pin:
+      mcp23017: in_hub1
+      number: 14
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output10
+
+  - platform: gpio
+    id: in11
+    pin:
+      mcp23017: in_hub1
+      number: 13
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output11
+
+  - platform: gpio
+    id: in12
+    pin:
+      mcp23017: in_hub1
+      number: 12
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output12
+
+  - platform: gpio
+    id: in13
+    pin:
+      mcp23017: in_hub1
+      number: 0
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output13
+
+  - platform: gpio
+    id: in14
+    pin:
+      mcp23017: in_hub1
+      number: 1
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output14
+
+  - platform: gpio
+    id: in15
+    pin:
+      mcp23017: in_hub1
+      number: 2
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output15
+
+  - platform: gpio
+    id: in16
+    pin:
+      mcp23017: in_hub1
+      number: 3
+      mode: INPUT_PULLUP
+      inverted: True
+    filters:
+      - delayed_on: 3ms
+      - delayed_off: 3ms
+    on_click:
+      then:
+        - switch.toggle: output16
+
+switch:
+  - platform: gpio
+    name: "PWM output 1"
+    id: pwm1
+    pin: GPIO2
+
+  - platform: gpio
+    name: "PWM output 2"
+    id: pwm2
+    pin: GPIO4
+
+  - platform: gpio
+    name: "Output 1"
+    id: output1
+    pin:
+      mcp23017: out_hub1
+      number: 6
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 2"
+    id: output2
+    pin:
+      mcp23017: out_hub1
+      number: 5
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 3"
+    id: output3
+    pin:
+      mcp23017: out_hub1
+      number: 4
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 4"
+    id: output4
+    pin:
+      mcp23017: out_hub1
+      number: 7
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 5"
+    id: output5
+    pin:
+      mcp23017: out_hub1
+      number: 8
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 6"
+    id: output6
+    pin:
+      mcp23017: out_hub1
+      number: 9
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 7"
+    id: output7
+    pin:
+      mcp23017: out_hub1
+      number: 10
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 8"
+    id: output8
+    pin:
+      mcp23017: out_hub1
+      number: 11
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 9"
+    id: output9
+    pin:
+      mcp23017: out_hub1
+      number: 12
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 10"
+    id: output10
+    pin:
+      mcp23017: out_hub1
+      number: 13
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 11"
+    id: output11
+    pin:
+      mcp23017: out_hub1
+      number: 3
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 12"
+    id: output12
+    pin:
+      mcp23017: out_hub1
+      number: 2
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 13"
+    id: output13
+    pin:
+      mcp23017: out_hub1
+      number: 1
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 14"
+    id: output14
+    pin:
+      mcp23017: out_hub1
+      number: 0
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 15"
+    id: output15
+    pin:
+      mcp23017: out_hub1
+      number: 14
+      mode: OUTPUT
+      inverted: False
+
+  - platform: gpio
+    name: "Output 16"
+    id: output16
+    pin:
+      mcp23017: out_hub1
+      number: 15
+      mode: OUTPUT
+      inverted: False
