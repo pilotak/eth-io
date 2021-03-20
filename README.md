@@ -1,7 +1,8 @@
+<img src="./images/eth-io_logo.svg " alt="logo" width="175" height="175">
 # ETH IO
 ESP32 based ethernet I/O board for home automation compatible with ESPHome, Tasmota, etc.
 
-Features:
+**Features**:
 - wide range of input voltage 6-28V
 - 4x opto-isolated "fast" operation inputs (connected to GPIO)
 - 16x opto-isolated general inputs (connected to MCP23017 expander)
