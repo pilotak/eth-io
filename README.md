@@ -26,6 +26,7 @@ Are meant to be used for reading pulses from utility meter ie. power meter with 
 ## Daisy chain design
 Should you need more inputs/outputs (up to 96 more inputs/outputs or combination thanks to changing the address of MCP23017) you can use the same PCB. Just don't populate ETH breakout board and ESP32 and solder AMS1117-3.3 with its capacitor. The boards will be via SDA/SCL but thanks to a bus buffer (P82B96) communication can easilly be made up to 20 meters!
 > In this mode the "slave" device can't use S0 inputs nor the PWM outputs
+
 ![Wiring 3](./images/wiring_3.jpg)
 
 ## Ethernet breakout board "fix"
