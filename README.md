@@ -29,4 +29,4 @@ Should you need more inputs/outputs (up to 96 more inputs/outputs or combination
 
 ![Wiring 3](./images/wiring_3.jpg)
 
-_For more information please visit [wiki](./wiki)_
+_For more information please visit [wiki](https://github.com/pilotak/eth-io/wiki)_
