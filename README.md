@@ -1,6 +1,9 @@
 <p align="center">
   <img src="./images/eth-io_logo.svg " alt="logo" width="175" height="175">
 </p>
+<p align="center">
+  <img src="./images/OSHW_mark_CZ000004.png " alt="logo" height="100">
+</p>
 
 # ETH IO
 ESP32 based ethernet I/O board for home automation compatible with ESPHome, Tasmota, etc.
